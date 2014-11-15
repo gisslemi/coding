@@ -15,15 +15,5 @@ namespace HelloNancy
             Console.ReadKey();
             host.Stop();  // stop hosting
         }
-    }
-
-
-
-    public class MainModule : NancyModule
-    {
-        public MainModule()
-        {
-            Get["/"] = x => "Hello World";
-        }
-    }
+    }    
 }

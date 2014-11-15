@@ -11,7 +11,11 @@ namespace HelloNancy
     {
         public MainModule()
         {
-            Get["/"] = x => "Hello World";
+            //Get["/"] = x => "Hello World";
+            Get["/"] = x => {
+                return View["index"];
+            };
+            
         }
     }
 }

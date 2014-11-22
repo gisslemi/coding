@@ -103,6 +103,7 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Repo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DAL\BookModel.edmx">
@@ -123,6 +124,9 @@
       <LastGenOutput>BookModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="Views\books.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Views\cars.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -166,6 +170,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

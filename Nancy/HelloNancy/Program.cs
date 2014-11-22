@@ -1,8 +1,12 @@
-﻿namespace HelloNancy
-{
-    using System;
-    using Nancy.Hosting.Self;
+﻿using System;
+using Nancy.Hosting.Self;
+using HelloNancy.Repository;
+using HelloNancy.DAL;
+using System.Linq;
+using System.Collections.Generic;
 
+namespace HelloNancy
+{
     class Program
     {
         static void Main(string[] args)
@@ -15,7 +19,7 @@
                 host.Start();
 
                 Console.WriteLine("Your application is running on " + uri);
-                Console.WriteLine("Press any [Enter] to close the host.");
+                Console.WriteLine("Press any [Enter] to close the host.");              
                 Console.ReadLine();
             }
         }

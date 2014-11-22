@@ -3,6 +3,8 @@
     using HelloNancy.Models;
     using Nancy;
     using System.Collections.Generic;
+    using Repository;
+    using HelloNancy.DAL;
 
     public class IndexModule : NancyModule
     {
@@ -11,6 +13,11 @@
             Get["/"] = parameters =>
             {
                 return View["index"];
+            };
+
+            Get["/books"] = parameters => {
+                List<Book> bookList = Repo.GetAllBooks();
+                return View["books", bookList];
             };
 
             Get["/cars"] = parameters =>

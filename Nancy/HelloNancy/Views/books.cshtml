@@ -1,0 +1,35 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<HelloNancy.DAL.Book>>
+@using HelloNancy.Models;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>HelloNancy</title>
+    <style type="text/css">
+        body
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img src="~/Content/nancy-logo.png" alt="Nancy logo" /><br />
+   
+        <table>
+           <tr>
+               <th>ID</th>
+               <th>title</th>
+               <th>Author</th>
+           </tr>
+
+            @foreach (HelloNancy.DAL.Book b in Model)
+            {
+                <tr>
+                    <td>@b.Id</td>
+                    <td>@b.Title</td>
+                    <td>@b.Author</td>                   
+                </tr>
+            }            
+        </table>                
+</body>
+</html>

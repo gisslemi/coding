@@ -13,9 +13,9 @@ namespace HelloNancy.DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BooksEntities : DbContext
+    public partial class BooksDbContext : DbContext
     {
-        public BooksEntities()
+        public BooksDbContext()
             : base("name=BooksEntities")
         {
         }

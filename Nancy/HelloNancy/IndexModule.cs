@@ -15,10 +15,10 @@
                 return View["index"];
             };
 
-            Get["/books"] = parameters => {
-                List<Book> bookList = Repo.GetAllBooks();
-                return View["books", bookList];
-            };
+            //Get["/books"] = parameters => {
+            //    List<Book> bookList = Repo.GetAllBooks();
+            //    return View["books", bookList];
+            //};
 
             Get["/cars"] = parameters =>
             {

@@ -7,107 +7,74 @@ using System.Text;
 
 namespace HelloNancy.Repository
 {
-    public class Repo
+    public class Repo : HelloNancy.Repository.IRepository, IDisposable
     {
-        public static void AddNewBook(Book book)
+        private BooksDbContext context;
+
+        public Repo(BooksDbContext context)
         {
-            try
+            this.context = context;
+        }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            return context.Books.ToList();  
+        }
+
+        public Book GetBookById(int id)
+        {
+            return context.Books.Find(id);
+        }
+
+        public void InsertBook(Book book)
+        {
+            context.Books.Add(book);
+        }
+
+        public void DeleteBook(int id)
+        {
+            Book book = context.Books.Find(id);
+            context.Books.Remove(book);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            context.Entry(book).State = EntityState.Modified;
+        }
+
+        public IEnumerable<Book> GetBooksByAuthor(string author)
+        {        
+            return context.Books.Where(b => b.Author == author).ToList();
+        }
+
+        public IEnumerable<Book> GetBooksByTitle(string title)
+        {
+            return context.Books.Where(b => b.Title == title).ToList();
+        }
+     
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
             {
-                using (var context = new BooksEntities())
+                if (disposing)
                 {
-                    
-                    context.Books.Add(book);
-                    context.SaveChanges();
+                    context.Dispose();
                 }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            this.disposed = true;
         }
 
-        public static List<Book> GetAllBooks()
+        public void Dispose()
         {
-            using (var context = new BooksEntities())
-            {                
-                var query = (from b in context.Books select b);
-                List<Book> books = new List<Book>();
-                foreach (Book book in query)
-                {
-                    books.Add(book);
-                }             
-                return books;
-            }
-        }
-
-        public static Book GetBookById(int id)
-        {
-            using (var context = new BooksEntities())
-            {
-                    var query = (from b in context.Books where b.Id == id select b).FirstOrDefault();
-                    return query;
-            }
-        }
-
-        public static List<Book> GetBooksByAuthor(string author)
-        {
-            using (var context = new BooksEntities())
-            {
-                var query = (from b in context.Books where b.Author == author select b);
-                List<Book> bookList = new List<Book>();
-                if (query != null)
-                {
-                    foreach (Book book in query)
-                    {
-                        bookList.Add(book);
-                    } 
-                }
-                return bookList;
-            }
-        }
-
-        public static List<Book> GetBooksByTitle(string title)
-        {
-            using (var context = new BooksEntities())
-            {
-                var query = (from b in context.Books where b.Title == title select b);
-                List<Book> bookList = new List<Book>();
-                if (query != null)
-                {
-                    foreach (Book book in query)
-                    {
-                        bookList.Add(book);
-                    }
-                }
-                return bookList;
-            }
-        }
-
-        public static void RemoveBookById(int id)
-        {
-            using (var context = new BooksEntities())
-            {
-                var query = (from b in context.Books where b.Id == id select b).FirstOrDefault();
-                if (query != null)
-                {
-                    context.Books.Remove(query);
-                    context.SaveChanges();            
-                }               
-            }
-        }
-
-        public static void RemoveAllBooks()
-        {
-            using (var context = new BooksEntities())
-            {
-                var query = (from b in context.Books select b).FirstOrDefault();
-                if (query != null)
-                {
-                    context.Books.Remove(query);
-                    context.SaveChanges();
-                }
-            }
-        }
-
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }       
     }
 }

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace HelloNancy.Repository
 {
-    public class Repo : HelloNancy.Repository.IRepository, IDisposable
+    public class BooksRepository : HelloNancy.Repository.IRepository, IDisposable
     {
         private BooksDbContext context;
 
-        public Repo(BooksDbContext context)
+        public BooksRepository(BooksDbContext context)
         {
             this.context = context;
         }
